@@ -25,6 +25,16 @@ func bubbleSort(players []Player) {
 	option(players)
 }
 
+func reset(players []Player){
+	players = []Player{
+		{Name: "Alice", MMR: 1200},
+		{Name: "Bob", MMR: 1300},
+		{Name: "Charlie", MMR: 1100},
+		{Name: "Diana", MMR: 1250},
+	}
+	option(players)
+}
+
 //Inisialisasi Data player
 func main() {
 	players := []Player{
@@ -42,6 +52,7 @@ func option(players []Player){
 	fmt.Println("===========Menu==========")
 	fmt.Println("1. Tampilkan data")
 	fmt.Println("2. Simulasi Match")
+	fmt.Println("3. Reset")
 	fmt.Println("==========================")
 	fmt.Scan(&menu)
 	switch menu{
@@ -49,6 +60,8 @@ func option(players []Player){
 			bubbleSort(players)
 		case 2:
 			simulate(players)
+		case 3: 
+			reset(players)
 	}
 }
 
