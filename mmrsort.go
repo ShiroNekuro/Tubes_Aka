@@ -55,9 +55,9 @@ func heapify(players []Player, n, i int) {
 	}
 }
 
-// Sorting MMR dan menampilkan MMR
-func bubbleSort(playersA []Player, playersB []Player) {
-	startA := time.Now()
+// Sorting MMR dengan bubble sort
+func bubbleSort(playersA []Player) {
+	
 	n := len(playersA)
 	for i := 0; i < n-1; i++ {
 		for j := 0; j < n-i-1; j++ {
@@ -67,45 +67,18 @@ func bubbleSort(playersA []Player, playersB []Player) {
 			}
 		}
 	}
-// 	fmt.Println("\nRanked Players:")
-// 	for rank, player := range playersA {
-// 		fmt.Printf("%d. %s: %d\n", rank+1, player.Name, player.MMR)
-// 	}
-	durationA := time.Since(startA)
-	fmt.Println("Execution time : ", durationA)
-	option(playersA, playersB)
 }
-
-// func reset(players []Player){
-// 	// Seed untuk random generator
-// 	rand.Seed(time.Now().UnixNano())
-
-// 	// Array nama contoh
-// 	names := []string{"Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Hank", "Ivy", "Jack"}
-
-// 	// Slice untuk menyimpan dummy data
-// 	players := make([]Player, num)
-
-// 	for i := 0; i < num; i++ {
-// 		// Pilih nama secara acak
-// 		name := names[rand.Intn(len(names))] + fmt.Sprintf("_%d", i+1)
-
-// 		// Generate nilai MMR secara acak (misalnya, antara 1000 hingga 2000)
-// 		mmr := rand.Intn(1001) + 1000
-
-// 		// Tambahkan ke array
-// 		players[i] = Player{Name: name, MMR: mmr}
-// 	}
-// 	option(players)
-// }
 
 //Inisialisasi Data player
 func main() {
 	// Seed untuk random generator
 	rand.Seed(time.Now().UnixNano())
-    num := 50000
+	
+	// Jumlah data yang akan digenerate
+    num := 200000
+    
 	// Array nama contoh
-	names := []string{"Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Hank", "Ivy", "Jack"}
+	names := []string{"Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Hank", "Ivy", "Jack", "Udin"}
 
 	// Slice untuk menyimpan dummy data
 	playersA := make([]Player, num)
@@ -115,80 +88,23 @@ func main() {
 		// Pilih nama secara acak
 		name := names[rand.Intn(len(names))] + fmt.Sprintf("_%d", i+1)
 
-		// Generate nilai MMR secara acak (misalnya, antara 1000 hingga 2000)
-		mmr := rand.Intn(1001) + 1000
+		// Generate nilai MMR secara acak
+		mmr := rand.Intn(4000)
 
 		// Tambahkan ke array
 		playersA[i] = Player{Name: name, MMR: mmr}
 		playersB[i] = Player{Name: name, MMR: mmr}
 	}
-	option(playersA, playersB)
+	
+	//menghitung execution time heap sort
+	startB := time.Now()
+	heapSort(playersB)
+	durationB := time.Since(startB)
+	fmt.Println("Heap sort execution time : ", durationB)
+	
+	//menghitung execution time bubble sort
+	startA := time.Now()
+	bubbleSort(playersA)
+	durationA := time.Since(startA)
+	fmt.Println("Bubble sort execution time : ", durationA)
 }
-
-//Menu
-func option(playersA []Player, playersB []Player){
-	var menu int
-	fmt.Println("===========Menu==========")
-	fmt.Println("1. Bubble sort")
-	fmt.Println("2. Heap sort")
-	fmt.Println("3. Simulasi Match")
-	fmt.Println("4. Reset")
-	fmt.Println("5. Show Data")
-	fmt.Println("==========================")
-	fmt.Scan(&menu)
-	switch menu{
-		case 1:
-			bubbleSort(playersA, playersB)
-			
-		case 2: 
-			heapSort(playersB)
-			startB := time.Now()
-// 			fmt.Println("\nRanked Players:")
-// 			for rank, player := range playersB {
-// 				fmt.Printf("%d. %s: %d\n", rank+1, player.Name, player.MMR)
-// 			}
-			durationB := time.Since(startB)
-			fmt.Println("Execution time : ", durationB)
-			option(playersA, playersB)
-		case 3:
-// 			simulate(players)
-		case 4: 
-// 			reset(players)
-        case 5:
-//             for rank, player := range players {
-// 				fmt.Printf("%d. %s: %d\n", rank+1, player.Name, player.MMR)
-// 			}
-// 			option(players)
-	}
-}
-
-//simulasi match
-// func simulate(players []Player){
-// 	var name string
-// 	var winlose string
-// 	fmt.Println("Masukkan nama player: ")
-// 	fmt.Scan(&name)
-// 	id := findPlayer(players, name)
-// 	if id == -1 {
-// 		fmt.Println("Player tidak ditemukan")
-// 		option(players)
-// 	}
-// 	fmt.Println("menang/kalah")
-// 	fmt.Scan(&winlose)
-// 	if winlose == "menang" {
-// 		players[id].MMR += 50
-// 	} else if winlose == "kalah" {
-// 		players[id].MMR -= 50
-// 	}
-// 	option(players)
-// }
-
-//function untuk mencari player dan mereturn index
-// func findPlayer(players []Player, name string) int{
-// 	for i, player := range players {
-// 		if player.Name == name {
-// 			return i
-// 		}
-// 	}
-// 	return -1
-// }
