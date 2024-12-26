@@ -75,7 +75,7 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 	
 	// Jumlah data yang akan digenerate
-    num := 200000
+    	num := 200000
     
 	// Array nama contoh
 	names := []string{"Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Hank", "Ivy", "Jack", "Udin"}
